@@ -7,7 +7,24 @@ module.exports = {
     "./components/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+
+    extend: {
+      colors: {
+        primary: "#272727",
+        secondary: "#F9FAFC",
+        'white': '#ffffff',
+      },
+    },
   },
   plugins: [],
+  safelist: [
+    'text-indigo-500',
+    'bg-indigo-200',
+    'text-green-500',
+    'bg-green-200',
+    {
+      pattern: /bg-(red|green|blue|sky|indigo|violet|pink|red)-(100|200|300|500)/,
+      pattern: /text-(red|green|blue|sky|indigo|violet|pink|red)-(100|200|300|500)/,
+    },
+  ],
 }
