@@ -1,0 +1,62 @@
+{
+  "project_info": {
+    "project_number": "860818350032",
+    "project_id": "one-space-store",
+    "storage_bucket": "one-space-store.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:860818350032:android:cc30200c10345f5efbe3d5",
+        "android_client_info": {
+          "package_name": "com.vsleitan.onespaceapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "860818350032-25bfonptrckd0qebh7uvevheh0nqpj58.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vsleitan.onespaceapp",
+            "certificate_hash": "927b6de02bee2eafea0dec58d1070b9271fbffd1"
+          }
+        },
+        {
+          "client_id": "860818350032-a47csrec43esj66sd4pblvg7684jqak0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.vsleitan.onespaceapp",
+            "certificate_hash": "848cc87da65339fccbb6cb9fdd611fbc36ea3687"
+          }
+        },
+        {
+          "client_id": "860818350032-qpd1upsn26h24vf49gmdlr5f92dtl1e3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7GinY1syBJ1A7RA0gRKsNKfxKKdlNLcg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "860818350032-cqhkc84b92bli4utuen7c8nlmheef1so.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "860818350032-96hm9ts2nkoii2fd65qdj5rfdupjs3k5.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "host.exp.exponent"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
