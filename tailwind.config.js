@@ -16,6 +16,11 @@ module.exports = {
       },
     },
   },
+  variants: {
+    extend: {
+      visibility: ["group-hover"],
+    },
+  },
   plugins: [],
   safelist: [
     'text-indigo-500',

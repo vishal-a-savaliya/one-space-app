@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react'
 import auth from '@react-native-firebase/auth';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import database from '@react-native-firebase/database';
 
 const Login = ({ navigation }) => {
 
@@ -30,6 +31,23 @@ const Login = ({ navigation }) => {
         const user_sign_in = auth().signInWithCredential(googleCredential);
         user_sign_in.then((user) => {
             console.log("Login Successfully")
+            console.log(user);
+            database()
+                .ref('/users/' + user.user.uid)
+                .set([{
+                    "title": user.user.displayName + "'s Notes",
+                    "description": "My first collection!",
+                    "tags": ["Quick share", "My Notes"],
+                    "Notes": [
+                        {
+                            "title": "Documentation",
+                            "URL": "https://onespace.com",
+                            "tags": ["Docs", "How To Use"],
+                        }
+                    ]
+                }])
+                .then(() => console.log('Data set.'))
+                .catch(error => console.log(error));
         })
             .catch((error) => {
                 console.log(error);

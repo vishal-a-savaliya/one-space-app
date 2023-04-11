@@ -16,12 +16,21 @@ export let collections = [
 
 ]
 
-export const colors = {
-    0: "sky",
-    1: "green",
-    2: "sky",
-    3: "violet",
-    4: "red",
-    5: "indigo",
-    6: "purple",
+export const bgColors = {
+    0: "bg-pink-200",
+    1: "bg-green-200",
+    2: "bg-sky-200",
+    3: "bg-violet-200",
+    4: "bg-red-200",
+    5: "bg-indigo-200",
+    6: "bg-purple-200",
+}
+export const textColors = {
+    0: "text-pink-500",
+    1: "text-green-500",
+    2: "text-sky-500",
+    3: "text-violet-500",
+    4: "text-red-500",
+    5: "text-indigo-500",
+    6: "text-purple-500",
 }

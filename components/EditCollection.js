@@ -1,20 +1,16 @@
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 
-const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
+const EditCollection = ({ EditCollection, setOpenModal, Data, Index }) => {
+
+    // console.log("From Edit: " + Data);
 
     const [Collection, setCollection] = useState({
 
-        "title": "",
-        "description": "",
-        "tags": [],
-        "Notes": [
-            {
-                "title": "Documentation",
-                "URL": "https://onespace.com",
-                "tags": ["Docs", "How To Use"],
-            },
-        ]
+        "title": Data.title,
+        "description": Data.description,
+        "tags": [...Data.tags],
+        "Notes": [...Data.Notes]
     });
 
     const [error, setError] = useState([false, false])
@@ -35,6 +31,13 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
         setTags("");
     }
 
+
+    const RemoveTag = (i) => {
+        let preCollection = { ...Collection };
+        preCollection.tags.splice(i, 1);
+        setCollection(preCollection);
+    }
+
     const HandelAddCollection = () => {
 
         let preError = { ...error };
@@ -49,7 +52,7 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
         }
 
         if (!error[0] && !error[1] && Collection.title.length != 0 && Collection.description.length != 0) {
-            AddCollection(Collection);
+            EditCollection(Collection, Index);
             setCollection({
                 "title": "",
                 "description": "",
@@ -67,17 +70,17 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
             {/* <Text className="text-black font-medium text-center" >Add Collection</Text> */}
             <View className="flex flex-col mx-2  mt-10">
 
-                {error[0] ? <Text className="text-rose-500 font-medium">Please Enter Title *</Text> : null}
+                {error[0] ? <Text className="text-rose-500 font-medium">Title *</Text> : null}
 
                 <TextInput placeholder='Enter Title' className="border-2 border-gray-600 text-black font-medium rounded-md px-3 py-2 h-10 my-1" name="title" onChangeText={(value) => handelInput(value, "title")} value={Collection.title} />
 
-                {error[1] ? <Text className="text-rose-500 font-medium">Please Enter Valid description *</Text> : null}
+                {error[1] ? <Text className="text-rose-500 font-medium">Description *</Text> : null}
                 <TextInput placeholder='Enter description' className="border-2 border-gray-600 text-black font-medium rounded-md px-3 py-2 h-10 my-1" name="title" onChangeText={(value) => handelInput(value, "description")} value={Collection.description} />
 
                 <TextInput placeholder='Enter #Tags for Collection' className="border-2 border-gray-600 text-black font-medium rounded-md px-3 py-2 h-10 my-1 mb-3" name="title" onChangeText={(value) => setTags(value)}
                     onSubmitEditing={handelInputTags} value={Tags} />
 
-                <Button title='Add Collection' onPress={() => { HandelAddCollection() }}></Button>
+                <Button title='Save Collection' onPress={() => { HandelAddCollection() }}></Button>
 
             </View>
 
@@ -85,7 +88,9 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
                 {
                     Collection.tags.map((tag, i) => {
                         return (
-                            <Text key={i} className={`bg-gray-200  text-gray-500 rounded-sm shadow-md inline-block px-2 py-1 mr-2`}>{tag}</Text>
+                            <TouchableOpacity onPress={() => { RemoveTag(i) }}>
+                                <Text key={i} className={`bg-gray-200  text-gray-500 rounded-sm shadow-md inline-block px-2 py-1 mr-2`}>{tag}</Text>
+                            </TouchableOpacity>
                         )
                     })
                 }
@@ -94,4 +99,4 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
     )
 }
 
-export default AddCollection
+export default EditCollection
