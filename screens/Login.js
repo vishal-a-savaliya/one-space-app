@@ -11,6 +11,7 @@ const Login = ({ navigation }) => {
     // Set an initializing state whilst Firebase connects
     const [initializing, setInitializing] = useState(true);
     const [user, setUser] = useState();
+    const [userExist, setUserExist] = useState(false);
 
     GoogleSignin.configure({
         webClientId: '860818350032-qpd1upsn26h24vf49gmdlr5f92dtl1e3.apps.googleusercontent.com',
@@ -32,6 +33,30 @@ const Login = ({ navigation }) => {
         user_sign_in.then((user) => {
             console.log("Login Successfully")
             console.log(user);
+            setData(user)
+
+        })
+            .catch((error) => {
+                console.log(error);
+            })
+
+        // console.log("login");
+    }
+
+    const setData = async (user) => {
+
+        await database()
+            .ref('/users/' + user.user.uid)
+            .once("value", snapshot => {
+                if (snapshot.exists()) {
+                    console.log("exists!");
+                    setUserExist(true);
+                } else {
+                    setUserExist(false);
+                }
+            });
+
+        if (!userExist) {
             database()
                 .ref('/users/' + user.user.uid)
                 .set([{
@@ -48,12 +73,7 @@ const Login = ({ navigation }) => {
                 }])
                 .then(() => console.log('Data set.'))
                 .catch(error => console.log(error));
-        })
-            .catch((error) => {
-                console.log(error);
-            })
-
-        console.log("login");
+        }
     }
 
     // Handle user state changes

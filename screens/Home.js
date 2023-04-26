@@ -100,7 +100,7 @@ export default function Home({ navigation }) {
         database()
             .ref('/users/' + data.uid)
             .on('value', snapshot => {
-                setCollections(snapshot.val());
+                setCollections(snapshot.val() ? snapshot.val() : []);
                 // console.log('User data: ', snapshot.val());
             })
             .then(() => console.log('fetch the data.'))
@@ -162,7 +162,7 @@ export default function Home({ navigation }) {
             {/* display the collections  */}
 
             <FlatList className="mt-3" data={collections} renderItem={({ item, index }) => (
-                <TouchableOpacity onPress={() => navigation.navigate('collection', { item, path: `/${index}/` })}>
+                <TouchableOpacity key={index} onPress={() => navigation.navigate('collection', { item, path: `/${index}/` })}>
                     <View className="flex mx-3 my-2 px-4 py-2 bg-secondary rounded-md shadow-md">
 
                         <View className="flex-row justify-between">

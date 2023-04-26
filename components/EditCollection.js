@@ -9,8 +9,8 @@ const EditCollection = ({ EditCollection, setOpenModal, Data, Index }) => {
 
         "title": Data.title,
         "description": Data.description,
-        "tags": [...Data.tags],
-        "Notes": [...Data.Notes]
+        "tags": Data.tags ? [...Data.tags] : [],
+        "Notes": Data.Notes ? [...Data.Notes] : []
     });
 
     const [error, setError] = useState([false, false])
@@ -86,13 +86,13 @@ const EditCollection = ({ EditCollection, setOpenModal, Data, Index }) => {
 
             <View className="flex justify-start flex-row mx-2 my-2 mt-5">
                 {
-                    Collection.tags.map((tag, i) => {
+                    Collection.tags ? Collection.tags.map((tag, i) => {
                         return (
                             <TouchableOpacity onPress={() => { RemoveTag(i) }}>
                                 <Text key={i} className={`bg-gray-200  text-gray-500 rounded-sm shadow-md inline-block px-2 py-1 mr-2`}>{tag}</Text>
                             </TouchableOpacity>
                         )
-                    })
+                    }) : null
                 }
             </View>
         </View>

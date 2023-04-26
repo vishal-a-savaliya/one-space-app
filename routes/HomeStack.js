@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation-stack';
 import Home from '../screens/Home';
 import Collection from '../screens/Collection';
+import Article from '../screens/Article';
 
 const screens = {
     Home: {
@@ -13,6 +14,12 @@ const screens = {
         screen: Collection,
         navigationOptions: {
             title: 'Collection',
+        }
+    },
+    Article: {
+        screen: Article,
+        navigationOptions: {
+            title: 'Article',
         }
     },
 };

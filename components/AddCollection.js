@@ -1,4 +1,4 @@
-import { View, Text, TextInput, Button } from 'react-native'
+import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 
 const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
@@ -33,6 +33,12 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
         preCollection.tags.push(Tags);
         setCollection(preCollection);
         setTags("");
+    }
+
+    const RemoveTag = (i) => {
+        let preCollection = { ...Collection };
+        preCollection.tags.splice(i, 1);
+        setCollection(preCollection);
     }
 
     const HandelAddCollection = () => {
@@ -83,11 +89,13 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
 
             <View className="flex justify-start flex-row mx-2 my-2 mt-5">
                 {
-                    Collection.tags.map((tag, i) => {
+                    Collection.tags ? Collection.tags.map((tag, i) => {
                         return (
-                            <Text key={i} className={`bg-gray-200  text-gray-500 rounded-sm shadow-md inline-block px-2 py-1 mr-2`}>{tag}</Text>
+                            <TouchableOpacity onPress={() => { RemoveTag(i) }}>
+                                <Text key={i} className={`bg-gray-200  text-gray-500 rounded-sm shadow-md inline-block px-2 py-1 mr-2`}>{tag}</Text>
+                            </TouchableOpacity>
                         )
-                    })
+                    }) : null
                 }
             </View>
         </View>

@@ -1,14 +1,18 @@
 import { View, Text, TextInput, Button, TouchableOpacity } from 'react-native'
 import React, { useState } from 'react'
 
-const AddNotes = ({ AddNote, setOpenModal }) => {
+const EditNote = ({ EditNote, setOpenModal, Data, Index }) => {
 
+    console.log(Data.tags)
 
     const [Note, setNote] = useState({
-        "title": "",
-        "URL": "",
-        "tags": [],
+        "title": Data.title,
+        "URL": Data.URL,
+        // "tags": [],
+        "tags": Data.tags ? [...Data.tags] : [],
     });
+
+    console.log("Edit Note!")
 
     const [error, setError] = useState([false, false])
 
@@ -48,7 +52,7 @@ const AddNotes = ({ AddNote, setOpenModal }) => {
         }
 
         if (!error[0] && !error[1] && Note.title.length != 0 && Note.URL.length != 0) {
-            AddNote(Note);
+            EditNote(Note, Index);
             setNote({
                 "title": "",
                 "URL": "",
@@ -75,7 +79,7 @@ const AddNotes = ({ AddNote, setOpenModal }) => {
                 <TextInput placeholder='Enter #Tags for Note' className="border-2 border-gray-600 text-black font-medium rounded-md px-3 py-2 h-10 my-1 mb-3" name="title" onChangeText={(value) => setTags(value)}
                     onSubmitEditing={handelInputTags} value={Tags} />
 
-                <Button title='Add Note' onPress={() => { HandelAddNote() }}></Button>
+                <Button title='Save Changes' onPress={() => { HandelAddNote() }}></Button>
 
             </View>
 
@@ -94,4 +98,4 @@ const AddNotes = ({ AddNote, setOpenModal }) => {
     )
 }
 
-export default AddNotes
+export default EditNote
