@@ -98,7 +98,7 @@ export default function Collection({ route, navigation }) {
         // preNote.push(Note);
         // console.log(preNote);
         preNote[index].title = Note.title;
-        preNote[index].URL = Note.URL;
+        preNote[index].url = Note.url;
         preNote[index].tags = [...Note.tags];
 
         const userData = await AsyncStorage.getItem('user');
@@ -168,19 +168,19 @@ export default function Collection({ route, navigation }) {
 
                 // console.log(item)
 
-                <TouchableOpacity onPress={() => navigation.navigate('Article', { URL: item.URL })}>
+                <TouchableOpacity onPress={() => navigation.navigate('Article', { url: item.url })}>
                     <View className="flex mx-3 my-2 px-3 py-1 bg-secondary shadow-md rounded-sm">
 
                         <View className="flex-row justify-between">
 
                             <View>
                                 <Text className="font-medium py-1">{item.title}</Text>
-                                <Text className="text-sky-500 font-medium pb-1">{item.URL}</Text>
+                                <Text className="text-sky-500 font-medium pb-1">{item.url}</Text>
                             </View>
 
                             <View className="flex-row w-[65px] justify-between">
 
-                                <TouchableOpacity onPress={() => { Clipboard.setStringAsync(item.URL); showToast() }}>
+                                <TouchableOpacity onPress={() => { Clipboard.setStringAsync(item.url); showToast() }}>
                                     <Image
                                         className="my-1"
                                         style={{ resizeMode: 'cover', width: 24, height: 24 }}

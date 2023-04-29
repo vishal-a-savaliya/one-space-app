@@ -11,7 +11,7 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
         "Notes": [
             {
                 "title": "Documentation",
-                "URL": "https://onespace.com",
+                "url": "https://onespace.com",
                 "tags": ["Docs", "How To Use"],
             },
         ]
@@ -91,8 +91,8 @@ const AddCollection = ({ AddCollection, setOpenModal, Type }) => {
                 {
                     Collection.tags ? Collection.tags.map((tag, i) => {
                         return (
-                            <TouchableOpacity onPress={() => { RemoveTag(i) }}>
-                                <Text key={i} className={`bg-gray-200  text-gray-500 rounded-sm shadow-md inline-block px-2 py-1 mr-2`}>{tag}</Text>
+                            <TouchableOpacity key={i} onPress={() => { RemoveTag(i) }}>
+                                <Text className={`bg-gray-200  text-gray-500 rounded-sm shadow-md inline-block px-2 py-1 mr-2`}>{tag}</Text>
                             </TouchableOpacity>
                         )
                     }) : null

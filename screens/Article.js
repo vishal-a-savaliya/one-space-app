@@ -25,7 +25,7 @@ function Article({ route, navigation }) {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ "url": param.URL })
+      body: JSON.stringify({ "url": param.url })
     });
 
     // console.log(response)

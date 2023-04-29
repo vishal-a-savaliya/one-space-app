@@ -8,6 +8,7 @@ const screens = {
         screen: Home,
         navigationOptions: {
             title: 'One Space',
+            headerLeft: () => null,
         }
     },
     Collection: {

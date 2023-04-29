@@ -53,26 +53,40 @@ const Login = ({ navigation }) => {
                     setUserExist(true);
                 } else {
                     setUserExist(false);
+                    database()
+                        .ref('/users/' + user.user.uid)
+                        .set([{
+                            "title": user.user.displayName + "'s Notes",
+                            "description": "My first collection!",
+                            "tags": ["Quick share", "My Notes"],
+                            "Notes": [
+                                {
+                                    "title": "Documentation",
+                                    "url": "https://onespace.com",
+                                    "tags": ["Docs", "How To Use"],
+                                }
+                            ]
+                        }])
+                        .then(() => console.log('Data set.'))
+                        .catch(error => console.log(error));
                 }
-            });
+            })
+            .then(() => console.log('USER AVAILABLE CHECK'))
+            .catch(error => console.log(error));
 
-        if (!userExist) {
-            database()
-                .ref('/users/' + user.user.uid)
-                .set([{
-                    "title": user.user.displayName + "'s Notes",
-                    "description": "My first collection!",
-                    "tags": ["Quick share", "My Notes"],
-                    "Notes": [
-                        {
-                            "title": "Documentation",
-                            "URL": "https://onespace.com",
-                            "tags": ["Docs", "How To Use"],
-                        }
-                    ]
-                }])
-                .then(() => console.log('Data set.'))
-                .catch(error => console.log(error));
+        // if (!userExist) {
+
+        // }
+
+        if (user.user) {
+            // console.log(user)
+            AsyncStorage.setItem(
+                'user',
+                JSON.stringify(user.user)
+            );
+            navigation.navigate('Home');
+        } else {
+            console.log("No User!")
         }
     }
 
@@ -87,16 +101,7 @@ const Login = ({ navigation }) => {
         return subscriber; // unsubscribe on unmount
     }, []);
 
-    if (user) {
-        // console.log(user)
-        AsyncStorage.setItem(
-            'user',
-            JSON.stringify(user)
-        );
-        navigation.navigate('Home');
-    } else {
-        console.log("No User!")
-    }
+
 
     const LogOut = () => {
         auth()
@@ -108,22 +113,53 @@ const Login = ({ navigation }) => {
     return (
         <View className="flex h-screen items-center">
 
-            <View className="mt-10 mb-5">
-                <Image
-                    style={{ resizeMode: 'cover', width: 190, height: 520 }}
-                    source={require('../assets/login_1.png')}
-                />
-            </View>
+
             {/* <Text className="text-3xl text-black font-bold my-3">1 SPACE</Text> */}
 
             {
-                user ? <TouchableOpacity className="text-green-500 font-medium" onPress={() => LogOut()}>
-                    <Text className="font-medium bg-black text-white py-2 px-4 rounded-sm shadow-md">LOGOUT</Text>
-                </TouchableOpacity> : <Button
-                    title="Sign-In With Google"
-                    color="#000"
-                    onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
-                />
+                user ? <View className="flex w-full h-screen items-center pt-20">
+
+                    <View className="mb-5">
+                        <Image
+                            style={{ resizeMode: 'cover', width: 110, height: 300 }}
+                            source={require('../assets/login_1.png')}
+                        />
+                    </View>
+
+                    <Text className="py-2 text-xl font-semibold">Hello {user.displayName} ! 😎</Text>
+                    <Text className="pb-2 mb-4 text-lg font-semibold">How it's Going...</Text>
+
+                    <View className="flex flex-row">
+                        <TouchableOpacity className="mr-4" onPress={() => navigation.navigate('Home')}>
+
+                            <Text className="font-medium bg-black text-white py-2 px-4 rounded-md shadow-md">HOME</Text>
+
+                        </TouchableOpacity>
+                        <TouchableOpacity className="text-green-500 font-medium" onPress={() => LogOut()}>
+
+                            <Text className="font-medium bg-black text-white py-2 px-4 rounded-md shadow-md">LOGOUT</Text>
+
+                        </TouchableOpacity>
+                    </View>
+
+
+
+                </View>
+                    : <View>
+
+                        <View className="mt-10 mb-5">
+                            <Image
+                                style={{ resizeMode: 'cover', width: 190, height: 520 }}
+                                source={require('../assets/login_1.png')}
+                            />
+                        </View>
+
+                        <Button
+                            title="Sign-In With Google"
+                            color="#000"
+                            onPress={() => onGoogleButtonPress().then(() => console.log('Signed in with Google!'))}
+                        />
+                    </View>
             }
 
 

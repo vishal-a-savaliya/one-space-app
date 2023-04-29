@@ -70,7 +70,7 @@ export default function Home({ navigation }) {
                 "Notes": [
                     {
                         "title": "Documentation",
-                        "URL": "https://onespace.com",
+                        "url": "https://onespace.com",
                         "tags": ["Docs", "How To Use"],
                     }
                 ]
